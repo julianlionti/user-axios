@@ -10,5 +10,9 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:jest/recommended',
+    'plugin:react-hooks/recommended',
   ],
+  rules: {
+    '@typescript-eslint/no-empty-function': ['off'],
+  },
 }

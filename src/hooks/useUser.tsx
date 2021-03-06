@@ -1,9 +1,14 @@
 // import React from 'react'
 
-interface UseUserReturn {
-  prueba: string
+import { Dispatch, SetStateAction } from 'react'
+import { UserType, useUserContext } from '../providers/UserAxiosProvider'
+
+interface UseUserReturn<T> {
+  user: UserType<T>
+  setUser: Dispatch<SetStateAction<T | null>>
 }
 
-export const useUser = (prueba: string): UseUserReturn => {
-  return { prueba }
+export const useUser = <T,>(): UseUserReturn<T> => {
+  const [user, setUser] = useUserContext<T>()
+  return { user, setUser }
 }
