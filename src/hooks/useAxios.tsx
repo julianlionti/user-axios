@@ -44,7 +44,7 @@ export const useAxios = <T extends unknown>(url: string, config?: Props): UseAxi
         dispatch({ type: 'FINISH', key: url, data, status })
       } else if (error) {
         dispatch({ type: 'ERROR', key: url, error })
-        
+
         if (onError)
           switch (error.type) {
             default:
@@ -67,9 +67,11 @@ export const useAxios = <T extends unknown>(url: string, config?: Props): UseAxi
   useEffect(() => {
     if (onInit && !onInitRef.current) {
       onInitRef.current = true
-      call(onInit)
+      if (!actual.data) {
+        call(onInit)
+      }
     }
-  }, [onInit, call])
+  }, [onInit, call, actual.data])
 
   return [actual.data, actual.loading, call, clean, actual.status, actual.error]
 }
